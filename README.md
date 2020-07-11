@@ -6,6 +6,8 @@ Node, Vue, Babel, BEM
 
 ![calc](./calc.png)
 
+PS: некоторые функции требуют доработки
+
 ## Настройка
 ```
 npm install
