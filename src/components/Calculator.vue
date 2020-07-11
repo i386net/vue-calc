@@ -1,8 +1,8 @@
 <template>
   <div class="calculator">
     <div class="calculator__display">{{ current || '0' }}</div>
-    <div class="calculator__button calculator__button_special">AC</div>
-    <div class="calculator__button calculator__button_special">+/-</div>
+    <div class="calculator__button calculator__button_special" @click="clear">AC</div>
+    <div class="calculator__button calculator__button_special" @click="sign">+/-</div>
     <div class="calculator__button calculator__button_special">%</div>
     <div class="calculator__button calculator__button_operator">÷</div>
     <div class="calculator__button calculator__button_number">7</div>
@@ -29,6 +29,14 @@ export default {
     return {
       current: '',
     }
+  },
+  methods: {
+    clear() {
+      this.current = '';
+    },
+    sign() {
+      this.current = this.current.charAt(0) === '-' ? this.current.slice(1) : `-${this.current}`;
+    },
   }
 }
 </script>
