@@ -18,7 +18,7 @@
     <div class="calculator__button calculator__button_number" @click="append('3')">3</div>
     <div class="calculator__button calculator__button_operator">+</div>
     <div class="calculator__button zero calculator__button_number" @click="append('0')">0</div>
-    <div class="calculator__button calculator__button_number">,</div>
+    <div class="calculator__button calculator__button_number" @click="dot">,</div>
     <div class="calculator__button calculator__button_operator">=</div>
   </div>
 </template>
@@ -42,7 +42,12 @@ export default {
     },
     append(number) {
       this.current += number //`${this.current}${number}`
-    }
+    },
+    dot() {
+      if( this.current.indexOf('.') === -1) {
+        this.append('.')
+      }
+    },
   }
 }
 </script>
