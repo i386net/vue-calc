@@ -1,24 +1,27 @@
 # vue-calculator
 
-## Project setup
+Простейший калькулятор, стилизованный под калькулятор на macOS.
+
+Node, Vue, Babel, BEM
+
+## Настройка
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Сборка для разработки с hot-reload
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Сборка для продакшена
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### Линтинг
 ```
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
