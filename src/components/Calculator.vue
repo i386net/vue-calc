@@ -3,21 +3,21 @@
     <div class="calculator__display">{{ current || '0' }}</div>
     <div class="calculator__button calculator__button_special" @click="clear">AC</div>
     <div class="calculator__button calculator__button_special" @click="sign">+/-</div>
-    <div class="calculator__button calculator__button_special">%</div>
+    <div class="calculator__button calculator__button_special" @click="percent">%</div>
     <div class="calculator__button calculator__button_operator">÷</div>
-    <div class="calculator__button calculator__button_number">7</div>
-    <div class="calculator__button calculator__button_number">8</div>
-    <div class="calculator__button calculator__button_number">9</div>
+    <div class="calculator__button calculator__button_number" @click="append('7')">7</div>
+    <div class="calculator__button calculator__button_number" @click="append('8')">8</div>
+    <div class="calculator__button calculator__button_number" @click="append('9')">9</div>
     <div class="calculator__button calculator__button_operator">×</div>
-    <div class="calculator__button calculator__button_number">4</div>
-    <div class="calculator__button calculator__button_number">5</div>
-    <div class="calculator__button calculator__button_number">6</div>
+    <div class="calculator__button calculator__button_number" @click="append('4')">4</div>
+    <div class="calculator__button calculator__button_number" @click="append('5')">5</div>
+    <div class="calculator__button calculator__button_number" @click="append('6')">6</div>
     <div class="calculator__button calculator__button_operator">−</div>
-    <div class="calculator__button calculator__button_number">1</div>
-    <div class="calculator__button calculator__button_number">2</div>
-    <div class="calculator__button calculator__button_number">3</div>
+    <div class="calculator__button calculator__button_number" @click="append('1')">1</div>
+    <div class="calculator__button calculator__button_number" @click="append('2')">2</div>
+    <div class="calculator__button calculator__button_number" @click="append('3')">3</div>
     <div class="calculator__button calculator__button_operator">+</div>
-    <div class="calculator__button zero calculator__button_number">0</div>
+    <div class="calculator__button zero calculator__button_number" @click="append('0')">0</div>
     <div class="calculator__button calculator__button_number">,</div>
     <div class="calculator__button calculator__button_operator">=</div>
   </div>
@@ -37,6 +37,12 @@ export default {
     sign() {
       this.current = this.current.charAt(0) === '-' ? this.current.slice(1) : `-${this.current}`;
     },
+    percent() {
+      this.current = `${parseFloat(this.current) / 100}`
+    },
+    append(number) {
+      this.current += number //`${this.current}${number}`
+    }
   }
 }
 </script>
