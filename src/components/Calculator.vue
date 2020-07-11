@@ -1,7 +1,7 @@
 <template>
   <div class="calculator">
     <div class="calculator__display">{{ current || '0' }}</div>
-    <div class="calculator__button calculator__button_special" @click="clear">AC</div>
+    <div class="calculator__button calculator__button_special" @click="clear">C</div>
     <div class="calculator__button calculator__button_special" @click="sign">+/-</div>
     <div class="calculator__button calculator__button_special" @click="percent">%</div>
     <div class="calculator__button calculator__button_operator" @click="divide">÷</div>
@@ -20,6 +20,8 @@
     <div class="calculator__button zero calculator__button_number calculator__button_border_bl" @click="append('0')">0</div>
     <div class="calculator__button calculator__button_number" @click="dot">,</div>
     <div class="calculator__button calculator__button_operator calculator__button_border_br" @click="equal">=</div>
+    <div class="prev">prev: {{ previous }}</div>
+    <div class="curr">curr: {{ current }}</div>
   </div>
 </template>
 
@@ -36,6 +38,7 @@ export default {
   methods: {
     clear() {
       this.current = '';
+      this.previous = '';
     },
     sign() {
       this.current = this.current.charAt(0) === '-' ? this.current.slice(1) : `-${this.current}`;
@@ -60,7 +63,7 @@ export default {
       this.operatorClicked = true;
     },
     divide() {
-      this.operator = (a, b) => a / b;
+      this.operator = (a, b) => b / a;
       this.setPrevious();
     },
     multiply(){
@@ -68,7 +71,7 @@ export default {
      this.setPrevious();
     },
     minus() {
-     this.operator = (a, b) => a - b;
+     this.operator = (a, b) => b - a;
      this.setPrevious();
     },
     plus() {
@@ -82,7 +85,7 @@ export default {
             parseFloat(this.previous)
         )
       }`;
-      this.previous = null;
+      // this.previous = null;
     },
   }
 }
@@ -98,11 +101,17 @@ export default {
     grid-auto-rows: minmax(50px, auto);
     font-size: 40px;
     color: #ffffff;
+    -webkit-box-shadow: -2px 10px 31px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: -2px 10px 31px 0px rgba(0,0,0,0.75);
+    box-shadow: -2px 10px 31px 0px rgba(0,0,0,0.75);
+    border-radius: 5px;
   }
   .calculator__display {
     grid-column: 1/5;
     background-color: rgb(88, 92, 95);
     border-radius: 5px 5px 0 0;
+    text-align: right;
+    padding-right: 10px;
   }
   .zero {
     grid-column: 1 / 3;
@@ -125,5 +134,8 @@ export default {
   }
   .calculator__button_border_bl {
     border-radius: 0 0 0 5px;
+  }
+  .prev, .curr {
+    color: black;
   }
 </style>
