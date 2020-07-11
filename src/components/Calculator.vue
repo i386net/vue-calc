@@ -1,28 +1,30 @@
 <template>
-  <div class="calculator">
-    <div class="calculator__display">{{ current || '0' }}</div>
-    <div class="calculator__button calculator__button_special" @click="clear">C</div>
-    <div class="calculator__button calculator__button_special" @click="sign">+/-</div>
-    <div class="calculator__button calculator__button_special" @click="percent">%</div>
-    <div class="calculator__button calculator__button_operator" @click="divide">÷</div>
-    <div class="calculator__button calculator__button_number" @click="append('7')">7</div>
-    <div class="calculator__button calculator__button_number" @click="append('8')">8</div>
-    <div class="calculator__button calculator__button_number" @click="append('9')">9</div>
-    <div class="calculator__button calculator__button_operator" @click="multiply">×</div>
-    <div class="calculator__button calculator__button_number" @click="append('4')">4</div>
-    <div class="calculator__button calculator__button_number" @click="append('5')">5</div>
-    <div class="calculator__button calculator__button_number" @click="append('6')">6</div>
-    <div class="calculator__button calculator__button_operator" @click="minus">−</div>
-    <div class="calculator__button calculator__button_number" @click="append('1')">1</div>
-    <div class="calculator__button calculator__button_number" @click="append('2')">2</div>
-    <div class="calculator__button calculator__button_number" @click="append('3')">3</div>
-    <div class="calculator__button calculator__button_operator" @click="plus">+</div>
-    <div class="calculator__button zero calculator__button_number calculator__button_border_bl" @click="append('0')">0</div>
-    <div class="calculator__button calculator__button_number" @click="dot">,</div>
-    <div class="calculator__button calculator__button_operator calculator__button_border_br" @click="equal">=</div>
-    <div class="prev">prev: {{ previous }}</div>
-    <div class="curr">curr: {{ current }}</div>
+  <div class="container">
+    <div class="table">{{current}}, {{previous}}, {{operator}}</div>
+    <div class="calculator">
+      <div class="calculator__display">{{ current || '0' }}</div>
+      <div class="calculator__button calculator__button_special" @click="clear()">C</div>
+      <div class="calculator__button calculator__button_special" @click="sign">+/-</div>
+      <div class="calculator__button calculator__button_special" @click="percent">%</div>
+      <div class="calculator__button calculator__button_operator" @click="divide">÷</div>
+      <div class="calculator__button calculator__button_number" @click="append('7')">7</div>
+      <div class="calculator__button calculator__button_number" @click="append('8')">8</div>
+      <div class="calculator__button calculator__button_number" @click="append('9')">9</div>
+      <div class="calculator__button calculator__button_operator" @click="multiply">×</div>
+      <div class="calculator__button calculator__button_number" @click="append('4')">4</div>
+      <div class="calculator__button calculator__button_number" @click="append('5')">5</div>
+      <div class="calculator__button calculator__button_number" @click="append('6')">6</div>
+      <div class="calculator__button calculator__button_operator" @click="minus">−</div>
+      <div class="calculator__button calculator__button_number" @click="append('1')">1</div>
+      <div class="calculator__button calculator__button_number" @click="append('2')">2</div>
+      <div class="calculator__button calculator__button_number" @click="append('3')">3</div>
+      <div class="calculator__button calculator__button_operator" @click="plus">+</div>
+      <div class="calculator__button zero calculator__button_number calculator__button_border_bl" @click="append('0')">0</div>
+      <div class="calculator__button calculator__button_number" @click="dot">,</div>
+      <div class="calculator__button calculator__button_operator calculator__button_border_br" @click="equal">=</div>
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -101,9 +103,9 @@ export default {
     grid-auto-rows: minmax(50px, auto);
     font-size: 40px;
     color: #ffffff;
-    -webkit-box-shadow: -2px 10px 31px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: -2px 10px 31px 0px rgba(0,0,0,0.75);
-    box-shadow: -2px 10px 31px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: -2px 10px 31px 0 rgba(0,0,0,0.75);
+    -moz-box-shadow: -2px 10px 31px 0 rgba(0,0,0,0.75);
+    box-shadow: -2px 10px 31px 0 rgba(0,0,0,0.75);
     border-radius: 5px;
   }
   .calculator__display {
@@ -120,6 +122,9 @@ export default {
     border: 1px solid rgb(88, 92, 95);
     cursor: pointer;
   }
+  .calculator__button:active {
+    background-color: rgb(182, 183, 184);
+  }
   .calculator__button_operator {
     background-color: darkorange;
   }
@@ -134,8 +139,5 @@ export default {
   }
   .calculator__button_border_bl {
     border-radius: 0 0 0 5px;
-  }
-  .prev, .curr {
-    color: black;
   }
 </style>
