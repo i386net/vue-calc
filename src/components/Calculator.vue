@@ -1,8 +1,16 @@
 <template>
   <div class="container">
-    <div class="table">{{current}}, {{previous}}, {{operator}}</div>
     <div class="calculator">
-      <div class="calculator__display">{{ current || '0' }}</div>
+
+      <div class="calculator__display">
+        <div class="calculator__icons">
+          <div class="calculator__icon calculator__icon_cancel">×</div>
+          <div class="calculator__icon calculator__icon_min"> −</div>
+          <div class="calculator__icon calculator__icon_max">+</div>
+        </div>
+        {{ current || '0' }}
+
+      </div>
       <div class="calculator__button calculator__button_special" @click="clear()">C</div>
       <div class="calculator__button calculator__button_special" @click="sign">+/-</div>
       <div class="calculator__button calculator__button_special" @click="percent">%</div>
@@ -65,7 +73,7 @@ export default {
       this.operatorClicked = true;
     },
     divide() {
-      this.operator = (a, b) => b / a;
+      this.operator = (a, b) => a / b;
       this.setPrevious();
     },
     multiply(){
@@ -73,7 +81,7 @@ export default {
      this.setPrevious();
     },
     minus() {
-     this.operator = (a, b) => b - a;
+     this.operator = (a, b) => a - b;
      this.setPrevious();
     },
     plus() {
@@ -83,11 +91,11 @@ export default {
     equal() {
       this.current = `${
         this.operator(
-            parseFloat(this.current),
-            parseFloat(this.previous)
+            parseFloat(this.previous),
+            parseFloat(this.current)
         )
       }`;
-      // this.previous = null;
+      this.previous = null;
     },
   }
 }
@@ -95,6 +103,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .container {
+    width: 100%;
+    height: 100%;
+    background-color: #2c3e50;
+    display: flex;
+    flex-direction: column;
+
+  }
   .calculator {
     width: 300px;
     margin: auto;
@@ -139,5 +155,36 @@ export default {
   }
   .calculator__button_border_bl {
     border-radius: 0 0 0 5px;
+  }
+  .calculator__icons {
+    height: 18px;
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    color: transparent;
+  }
+  .calculator__icons:hover {
+    color: black;
+  }
+  .calculator__icon {
+    width: 12px;
+    height: 12px;
+    margin-top: 4px;
+    margin-left: 4px;
+    border-radius: 50%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .calculator__icon_cancel {
+    background-color: rgb(237, 101, 89);
+  }
+  .calculator__icon_min {
+    background-color: rgb(224, 192, 76);
+  }
+  .calculator__icon_max {
+    background-color: rgb(115, 190, 70);
   }
 </style>
