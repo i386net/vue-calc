@@ -4,22 +4,22 @@
     <div class="calculator__button calculator__button_special" @click="clear">AC</div>
     <div class="calculator__button calculator__button_special" @click="sign">+/-</div>
     <div class="calculator__button calculator__button_special" @click="percent">%</div>
-    <div class="calculator__button calculator__button_operator">÷</div>
+    <div class="calculator__button calculator__button_operator" @click="divide">÷</div>
     <div class="calculator__button calculator__button_number" @click="append('7')">7</div>
     <div class="calculator__button calculator__button_number" @click="append('8')">8</div>
     <div class="calculator__button calculator__button_number" @click="append('9')">9</div>
-    <div class="calculator__button calculator__button_operator">×</div>
+    <div class="calculator__button calculator__button_operator" @click="multiply">×</div>
     <div class="calculator__button calculator__button_number" @click="append('4')">4</div>
     <div class="calculator__button calculator__button_number" @click="append('5')">5</div>
     <div class="calculator__button calculator__button_number" @click="append('6')">6</div>
-    <div class="calculator__button calculator__button_operator">−</div>
+    <div class="calculator__button calculator__button_operator" @click="minus">−</div>
     <div class="calculator__button calculator__button_number" @click="append('1')">1</div>
     <div class="calculator__button calculator__button_number" @click="append('2')">2</div>
     <div class="calculator__button calculator__button_number" @click="append('3')">3</div>
-    <div class="calculator__button calculator__button_operator">+</div>
+    <div class="calculator__button calculator__button_operator" @click="plus">+</div>
     <div class="calculator__button zero calculator__button_number" @click="append('0')">0</div>
     <div class="calculator__button calculator__button_number" @click="dot">,</div>
-    <div class="calculator__button calculator__button_operator">=</div>
+    <div class="calculator__button calculator__button_operator" @click="equal">=</div>
   </div>
 </template>
 
@@ -28,6 +28,9 @@ export default {
   data() {
     return {
       current: '',
+      previous: null,
+      operator: null,
+      operatorClicked: false,
     }
   },
   methods: {
@@ -41,12 +44,45 @@ export default {
       this.current = `${parseFloat(this.current) / 100}`
     },
     append(number) {
+      if(this.operatorClicked) {
+        this.current = '';
+        this.operatorClicked = false;
+      }
       this.current += number //`${this.current}${number}`
     },
     dot() {
       if( this.current.indexOf('.') === -1) {
         this.append('.')
       }
+    },
+    setPrevious() {
+      this.previous = this.current;
+      this.operatorClicked = true;
+    },
+    divide() {
+      this.operator = (a, b) => a / b;
+      this.setPrevious();
+    },
+    multiply(){
+     this.operator = (a, b) => a * b;
+     this.setPrevious();
+    },
+    minus() {
+     this.operator = (a, b) => a - b;
+     this.setPrevious();
+    },
+    plus() {
+     this.operator = (a, b) => a + b;
+     this.setPrevious();
+    },
+    equal() {
+      this.current = `${
+        this.operator(
+            parseFloat(this.current),
+            parseFloat(this.previous)
+        )
+      }`;
+      this.previous = null;
     },
   }
 }
