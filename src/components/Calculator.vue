@@ -17,9 +17,9 @@
     <div class="calculator__button calculator__button_number" @click="append('2')">2</div>
     <div class="calculator__button calculator__button_number" @click="append('3')">3</div>
     <div class="calculator__button calculator__button_operator" @click="plus">+</div>
-    <div class="calculator__button zero calculator__button_number" @click="append('0')">0</div>
+    <div class="calculator__button zero calculator__button_number calculator__button_border_bl" @click="append('0')">0</div>
     <div class="calculator__button calculator__button_number" @click="dot">,</div>
-    <div class="calculator__button calculator__button_operator" @click="equal">=</div>
+    <div class="calculator__button calculator__button_operator calculator__button_border_br" @click="equal">=</div>
   </div>
 </template>
 
@@ -91,7 +91,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .calculator {
-    width: 400px;
+    width: 300px;
     margin: auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -102,12 +102,14 @@ export default {
   .calculator__display {
     grid-column: 1/5;
     background-color: rgb(88, 92, 95);
+    border-radius: 5px 5px 0 0;
   }
   .zero {
     grid-column: 1 / 3;
   }
   .calculator__button {
     border: 1px solid rgb(88, 92, 95);
+    cursor: pointer;
   }
   .calculator__button_operator {
     background-color: darkorange;
@@ -117,5 +119,11 @@ export default {
   }
   .calculator__button_special {
     background-color: rgb(104, 107, 110);
+  }
+  .calculator__button_border_br {
+    border-radius: 0 0 5px 0;
+  }
+  .calculator__button_border_bl {
+    border-radius: 0 0 0 5px;
   }
 </style>
